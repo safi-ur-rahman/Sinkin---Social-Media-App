@@ -79,9 +79,7 @@ To install and run PostIt locally, follow the steps below:
 ![Explore View](https://user-images.githubusercontent.com/76620777/170822044-44c5f2e6-879f-4b16-8059-f9e331ba57de.png)
 
 ### Post View
-![Post View](https://user-images.githubusercontent.com/76620777
-
-/170822055-ac686a28-7d5b-4d44-b8d3-a028521534d8.png)
+![Post View](https://user-images.githubusercontent.com/76620777/170822055-ac686a28-7d5b-4d44-b8d3-a028521534d8.png)
 
 ### Nested Comments
 ![Nested Comments](https://user-images.githubusercontent.com/76620777/170822065-64622f43-5f70-48c2-9503-0e1b80575fd2.png)
