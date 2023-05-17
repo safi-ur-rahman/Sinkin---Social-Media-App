@@ -1,0 +1,63 @@
+
+
+.profileimage{
+    width: 250px;
+    height: 250px;
+    border-radius: 150px;
+    border: 2px solid black;
+
+}
+
+.UserDetails{
+    margin: 50px;
+}
+
+.UserDetails h2 {
+    font-family:'Times New Roman', Times, serif;
+}
+.UserDetails h4{
+    font-family: 'Times New Roman', Times, serif;
+    font-size:large;
+    font-weight:400;
+}
+
+.Main{
+    display: flex;
+    flex-direction: row;
+    margin: 50px;
+
+}
+ 
+.Bio{
+    font-family:'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+
+.posts{
+    margin: 15px;
+    border: 1px solid purple;
+    justify-content: space-between;
+    width: 800px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.flexrow{
+    padding: 0%;
+    margin: 0px;
+    display: flex;
+    flex-direction: row;
+    align-items:baseline;
+}
+.postimage{
+
+    height: 150px;
+    width: 150px;
+}
+
+.parallel{
+
+    display: flex;
+    flex-direction: row;
+}

@@ -1,0 +1,302 @@
+body{
+    background-color: rgb(24, 24, 24);
+    color: rgb(225, 224, 224);
+}
+
+p {
+    font-family: 'lato';
+}
+
+.center-align {
+    text-align: center;
+}
+
+.logo {
+    width: 60px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-image: linear-gradient(to right, rgb(174, 0, 255),rgb(108, 0, 158),rgb(55, 0, 85));
+    animation: animate-background 15s ease infinite;
+    background-size: 200% 200%;
+    padding: 0.5em;
+    border-bottom: 1px purple solid;
+}
+
+.search {
+    display:flex;
+}
+
+.search input {
+    width: 300px;
+    padding: 6px;
+    text-align: center;
+    background-color: rgb(226, 196, 255);
+    border: 1px purple solid;
+    border-radius: 5px;
+}
+
+.search button {
+    cursor: pointer;
+    padding: 5px 1.5em;
+    background-color: rgb(18, 0, 32);
+    border: none;
+    border-radius: 5px;
+}
+
+.search img{
+    width:18px;
+}
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.message-icon {
+    margin-right: 2em;
+    width:30px;
+    cursor: pointer;
+}
+
+
+.profile-icon {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.profile-pic {
+    width: 35px;
+    margin: 0em 0.5em;
+    border: 1px purple solid;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.comms-icons {
+    display: flex;
+    align-items: center;
+    padding: 0.5em;
+    background-color: rgb(33, 23, 43);
+    border-bottom: 1px purple solid;
+    overflow-x: auto;
+}
+
+.comm-icon {
+    width: 40px;
+    margin: 0px 10px;    
+    border: 1px purple solid;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.body-grid {
+    padding: 1em;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-template-rows: 500px 400px;
+    grid-template-areas: "feed create-post"
+                        "feed create-comm";
+    gap: 0.5em;
+}
+
+.feed {
+    overflow-y: auto;
+    grid-area: feed;
+    border: 1px black solid;
+    padding: 1em;
+    background-color: rgb(28, 28, 28);
+    border-radius: 5px;
+}
+
+.feed-post {
+    background-color: rgb(23, 23, 23);
+    padding: 0.5em;
+    border-radius: 5px;
+    margin-bottom: 1em;
+}
+
+.post-flex {
+    display: flex;
+}
+
+.post-img {
+    width: 400px;
+}
+
+.post-info {
+    margin: 0em 1em;
+}
+
+.post-loc {
+    color: rgb(192, 192, 192);
+    font-size: smaller;
+    font-style: italic;
+    cursor: pointer;
+}
+
+.post-time {
+    color: rgb(192, 192, 192);
+    font-size: smaller;
+}
+
+.poster-profile-pic {
+    margin-right: 5px;
+    width: 35px;
+    border: 1px purple solid;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.poster-profile {
+    display: flex;
+    align-items: center;
+}
+
+.post-reaction-buttons {
+    display: flex;
+    
+    justify-content:center;
+}
+
+.people-tagged {
+    display: flex;
+    align-items: center;
+}
+
+.people-tagged p {
+    font-size: smaller;
+    padding-left: 5px;
+}
+
+.post-reaction-buttons button{
+    background-color: rgb(153, 93, 225);
+    border: none;
+    border-radius: 5px;
+    width: 40%;
+    margin: 1em;
+    padding: 1em 0.5em;
+    color:rgb(235, 235, 235);
+    cursor: pointer;
+}
+
+.create-post{
+    grid-area: create-post;
+    border: 1px black solid;
+    padding: 1em;
+    background-color: rgb(28, 28, 28);
+    border-radius: 5px;
+}
+
+.post-tag-button{
+    background-color: rgb(153, 93, 225);
+    border: none;
+    border-radius: 5px;
+    width: 90%;
+    margin: 0.5em;
+    padding: 1em 0.5em;
+    color:rgb(235, 235, 235);
+    cursor: pointer;
+}
+
+.post-button{
+    background-color: rgb(64, 17, 121);
+    border: none;
+    border-radius: 5px;
+    width: 90%;
+    margin: 0.5em;
+    padding: 1em 0.5em;
+    color:rgb(235, 235, 235);
+    cursor: pointer;
+
+}
+
+.preview {
+    padding: 5em;
+    border: 1px purple solid;
+    border-radius: 5px;
+    background-color: rgb(32, 32, 32);
+}
+
+.post-media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.post-media-button {
+    background-color: rgb(64, 17, 121);
+    border: none;
+    border-radius: 5px;
+    margin: 0.5em;
+    padding: 1em 1em;
+    color:rgb(235, 235, 235);
+    cursor: pointer;
+    width: 100%;
+}
+
+.create-comm {
+    grid-area: create-comm;
+    border: 1px black solid;
+    padding: 1em;
+    background-color: rgb(28, 28, 28);
+    border-radius: 5px;
+}
+
+.your-comm-info {
+    display: flex;
+    align-items: center;
+    padding: 0.5em;
+    margin: 0.5em 0em;
+    border: 1px rgb(107, 0, 178) solid;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.created-comms {
+    height: 250px;
+    overflow-y: auto;
+    border: 1px black solid;
+    border-radius: 5px;
+    padding: 0em 0.5em;
+    background-color: rgb(20, 20, 20);
+}
+
+.comm-pic {
+    margin-right: 15px;
+    width: 50px;
+    border: 1px purple solid;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.create-comm-button{
+    background-color: rgb(64, 17, 121);
+    border: none;
+    border-radius: 5px;
+    width: 80%;
+    margin: 1em;
+    padding: 1em 0.5em;
+    color:rgb(235, 235, 235);
+    cursor: pointer;
+}
+
+.line {
+    border-bottom: 1px black solid;
+}
+
+@keyframes animate-background {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
