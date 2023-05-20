@@ -1,6 +1,7 @@
-import { Container, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import GoBack from "../GoBack";
+import "./PostView.css";
+import { Container, Stack } from "@mui/material";
 import GridLayout from "../GridLayout";
 import Loading from "../Loading";
 import Navbar from "../Navbar";
@@ -36,26 +37,23 @@ const PostView = () => {
   }, [params.id]);
 
   return (
-    <Container>
+    <div className="post-view-container">
       <Navbar />
       <GoBack />
-      <GridLayout
-        left={
-          loading ? (
-            <Loading />
-          ) : post ? (
-            <Stack spacing={2}>
-              <PostCard post={post} key={post._id} />
-
-              <Comments />
-            </Stack>
-          ) : (
-            error && <ErrorAlert error={error} />
-          )
-        }
-        right={<Sidebar />}
-      />
-    </Container>
+      <div className="grid-layout">
+        {loading ? (
+          <Loading />
+        ) : post ? (
+          <div className="post-content">
+            <PostCard post={post} key={post._id} />
+            <Comments />
+          </div>
+        ) : (
+          error && <ErrorAlert error={error} />
+        )}
+        <Sidebar />
+      </div>
+    </div>
   );
 };
 

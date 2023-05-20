@@ -1,12 +1,17 @@
 const mongoose = require("mongoose");
+const multer = require("multer");
+const express = require("express");
+const app = express();
 const Post = require("../models/Post");
 const User = require("../models/User");
 const Comment = require("../models/Comment");
 const PostLike = require("../models/PostLike");
 const paginate = require("../util/paginate");
+const path = require('path');
 const cooldown = new Set();
 
 const createPost = async (req, res) => {
+  
   try {
     const { title, content, userId } = req.body;
 
@@ -23,11 +28,21 @@ const createPost = async (req, res) => {
     cooldown.add(userId);
     setTimeout(() => {
       cooldown.delete(userId);
-    }, 60000);
+    }, 60);
+
+    let image = null;
+    if (req.file) {
+      // If a file was uploaded, store the file path or URL in the image variable
+      image = req.file.path;
+      const fileName = path.basename(image); // "image.jpg"
+      const folderName = path.basename(path.dirname(image)); // Replace with the appropriate field to access the file path or URL
+      image = path.join(folderName, fileName);
+    }
 
     const post = await Post.create({
       title,
       content,
+      image,
       poster: userId,
     });
 
@@ -36,6 +51,9 @@ const createPost = async (req, res) => {
     return res.status(400).json({ error: err.message });
   }
 };
+
+// Apply the upload middleware to the appropriate route
+// app.post("/api/posts", upload.single("image"), createPost);
 
 const getPost = async (req, res) => {
   try {

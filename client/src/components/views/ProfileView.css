@@ -1,0 +1,35 @@
+.profile-view-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .tab-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Add additional styles as needed */
+  

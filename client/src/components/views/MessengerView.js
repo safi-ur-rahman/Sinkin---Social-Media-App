@@ -1,5 +1,3 @@
-import { Card, Grid } from "@mui/material";
-import { Box, Container } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import Messages from "../Messages";
 import Navbar from "../Navbar";
@@ -7,6 +5,7 @@ import UserMessengerEntries from "../UserMessengerEntries";
 import { getConversations } from "../../api/messages";
 import { isLoggedIn } from "../../helpers/authHelper";
 import { useLocation } from "react-router-dom";
+import "./MessengerView.css";
 
 const MessengerView = () => {
   const [conservant, setConservant] = useState(null);
@@ -17,7 +16,7 @@ const MessengerView = () => {
   const user = isLoggedIn();
   const { state } = useLocation();
   const newConservant = state && state.user;
-
+  
   const getConversation = (conversations, conservantId) => {
     for (let i = 0; i < conversations.length; i++) {
       const conversation = conversations[i];
@@ -62,35 +61,23 @@ const MessengerView = () => {
   };
 
   return (
-    <Container>
+    <div className="container">
       <Navbar />
-      <Box>
-        <Card sx={{ padding: 0 }}>
-          <Grid
-            container
-            sx={{ height: "calc(100vh - 110px)" }}
-            alignItems="stretch"
-          >
+      <div className="messenger-view">
+        <div className="card">
+          <div className="grid-container">
             {!mobile ? (
               <>
-                <Grid
-                  item
-                  xs={5}
-                  sx={{
-                    borderRight: 1,
-                    borderColor: "divider",
-                    height: "100%",
-                  }}
-                >
+                <div className="user-messenger-entries">
                   <UserMessengerEntries
                     conservant={conservant}
                     conversations={conversations}
                     setConservant={setConservant}
                     loading={loading}
                   />
-                </Grid>
+                </div>
 
-                <Grid item xs={7} sx={{ height: "100%" }}>
+                <div className="messages">
                   <Messages
                     conservant={conservant}
                     conversations={conversations}
@@ -98,25 +85,17 @@ const MessengerView = () => {
                     setConversations={setConversations}
                     getConversation={getConversation}
                   />
-                </Grid>
+                </div>
               </>
             ) : !conservant ? (
-              <Grid
-                item
-                xs={12}
-                sx={{
-                  borderRight: 1,
-                  borderColor: "divider",
-                  height: "100%",
-                }}
-              >
+              <div className="user-messenger-entries">
                 <UserMessengerEntries
                   conservant={conservant}
                   conversations={conversations}
                   setConservant={setConservant}
                   loading={loading}
                 />
-                <Box sx={{ display: "none" }}>
+                <div className="hidden-messages">
                   <Messages
                     conservant={conservant}
                     conversations={conversations}
@@ -124,10 +103,10 @@ const MessengerView = () => {
                     setConversations={setConversations}
                     getConversation={getConversation}
                   />
-                </Box>
-              </Grid>
+                </div>
+              </div>
             ) : (
-              <Grid item xs={12} sx={{ height: "100%" }}>
+              <div className="messages">
                 <Messages
                   conservant={conservant}
                   conversations={conversations}
@@ -136,12 +115,12 @@ const MessengerView = () => {
                   getConversation={getConversation}
                   mobile
                 />
-              </Grid>
+              </div>
             )}
-          </Grid>
-        </Card>
-      </Box>
-    </Container>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

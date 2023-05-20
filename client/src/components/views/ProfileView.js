@@ -1,21 +1,18 @@
-import { Card, Container, Stack, Tab, Tabs } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getUser, updateUser } from "../../api/users";
 import { isLoggedIn } from "../../helpers/authHelper";
 import CommentBrowser from "../CommentBrowser";
-
 import ErrorAlert from "../ErrorAlert";
-import FindUsers from "../FindUsers";
 import Footer from "../Footer";
 import GoBack from "../GoBack";
-import GridLayout from "../GridLayout";
 import Loading from "../Loading";
 import MobileProfile from "../MobileProfile";
 import Navbar from "../Navbar";
 import PostBrowser from "../PostBrowser";
 import Profile from "../Profile";
 import ProfileTabs from "../ProfileTabs";
+import "./ProfileView.css";
 
 const ProfileView = () => {
   const [loading, setLoading] = useState(true);
@@ -93,51 +90,45 @@ const ProfileView = () => {
   }
 
   return (
-    <Container>
+    <div className="profile-view-container">
       <Navbar />
-
-      <GridLayout
-        left={
-          <>
-            <MobileProfile
-              profile={profile}
-              editing={editing}
-              handleSubmit={handleSubmit}
-              handleEditing={handleEditing}
-              handleMessage={handleMessage}
-              validate={validate}
-            />
-            <Stack spacing={2}>
-              {profile ? (
-                <>
-                  <ProfileTabs tab={tab} setTab={setTab} />
-
-                  {tabs[tab]}
-                </>
-              ) : (
-                <Loading />
-              )}
-              {error && <ErrorAlert error={error} />}
-            </Stack>
-          </>
-        }
-        right={
-          <Stack spacing={2}>
-            <Profile
-              profile={profile}
-              editing={editing}
-              handleSubmit={handleSubmit}
-              handleEditing={handleEditing}
-              handleMessage={handleMessage}
-              validate={validate}
-            />
-
-            {/* <FindUsers /> */}
-            <Footer />
-          </Stack>
-        }
-      />
-    </Container>
+      <GoBack />
+      <div className="grid-layout">
+        <div className="left-column">
+          <MobileProfile
+            profile={profile}
+            editing={editing}
+            handleSubmit={handleSubmit}
+            handleEditing={handleEditing}
+            handleMessage={handleMessage}
+            validate={validate}
+          />
+          <div className="tab-content">
+            {profile ? (
+              <>
+                <ProfileTabs tab={tab} setTab={setTab} />
+                {tabs[tab]}
+              </>
+            ) : (
+              <Loading />
+            )}
+            {error && <ErrorAlert error={error} />}
+          </div>
+        </div>
+        <div className="right-column">
+          <Profile
+            profile={profile}
+            editing={editing}
+            handleSubmit={handleSubmit}
+            handleEditing={handleEditing}
+            handleMessage={handleMessage}
+            validate={validate}
+          />
+          {/* <FindUsers /> */}
+          <Footer />
+        </div>
+      </div>
+    </div>
   );
 };
 

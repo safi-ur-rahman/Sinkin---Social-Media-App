@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const postControllers = require("../controllers/postControllers");
+const upload = require('../middleware/upload');
 const { verifyToken, optionallyVerifyToken } = require("../middleware/auth");
 
 router.get("/", optionallyVerifyToken, postControllers.getPosts);
-router.post("/", verifyToken, postControllers.createPost);
+// router.post("/", verifyToken, postControllers.createPost);
+router.post("/", upload.single('image'), verifyToken, postControllers.createPost);
 
 router.get("/:id", optionallyVerifyToken, postControllers.getPost);
 router.patch("/:id", verifyToken, postControllers.updatePost);

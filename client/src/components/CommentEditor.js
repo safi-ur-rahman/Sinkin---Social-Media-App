@@ -74,7 +74,7 @@ const CommentEditor = ({ label, comment, addComment, setReplying }) => {
             required
             name="content"
             sx={{
-              backgroundColor: "white",
+              backgroundColor: "#444",
             }}
             onChange={handleChange}
             onFocus={handleFocus}
@@ -88,7 +88,8 @@ const CommentEditor = ({ label, comment, addComment, setReplying }) => {
             fullWidth
             disabled={loading}
             sx={{
-              backgroundColor: "white",
+              backgroundColor: "#007bff",
+              color: "white",
               mt: 2,
             }}
           >

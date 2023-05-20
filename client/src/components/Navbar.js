@@ -89,7 +89,7 @@ const Navbar = () => {
             sx={{ display: mobile ? "none" : "block" }}
             variant={navbarWidth ? "h6" : "h4"}
             mr={1}
-            color="#800080"
+            color="#007bff"
             onClick={() => navigate("/")}
           >
             {/* <Link to="/" color="inherit"> */}
@@ -100,10 +100,10 @@ const Navbar = () => {
 
         {!navbarWidth && (
           <Box component="form" onSubmit={handleSubmit}>
-            <TextField
+            <TextField 
               size="small"
               label="Search for users..."
-              sx={{ flexGrow: 1, maxWidth: 300 }}
+              sx={{ flexGrow: 1, maxWidth: 300}}
               onChange={handleChange}
               value={search}
             />
@@ -112,20 +112,20 @@ const Navbar = () => {
 
         <HorizontalStack>
           {mobile && (
-            <IconButton onClick={handleSearchIcon}>
+            <IconButton sx={{ color: "#00aaff" }} onClick={handleSearchIcon}>
               <AiOutlineSearch />
             </IconButton>
           )}
 
-          <IconButton component={Link} to={"/"}>
+          <IconButton sx={{ color: "#00aaff" }} component={Link} to={"/"}>
             <AiFillHome />
           </IconButton>
-          <IconButton component={Link} to={"/"}>
+          <IconButton sx={{ color: "#00aaff" }} component={Link} to={"/"}>
             <PeopleIcon />
           </IconButton>
           {user ? (
             <>
-              <IconButton component={Link} to={"/messenger"}>
+              <IconButton sx={{ color: "#00aaff" }} component={Link} to={"/messenger"}>
                 <AiFillMessage />
               </IconButton>
               <IconButton component={Link}  to={"/users/" + username}>

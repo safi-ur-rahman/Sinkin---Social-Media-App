@@ -1,20 +1,9 @@
-import {
-  Alert,
-  Button,
-  Checkbox,
-  Container,
-  FormControlLabel,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../api/users";
 import ErrorAlert from "../ErrorAlert";
 import { loginUser } from "../../helpers/authHelper";
-import Copyright from "../Copyright";
+import "./LoginView.css";
 
 const LoginView = () => {
   const navigate = useNavigate();
@@ -43,52 +32,44 @@ const LoginView = () => {
   };
 
   return (
-    <Container maxWidth={"xs"} sx={{ mt: 6 }}>
-      <Stack alignItems="center">
-        <Typography variant="h2" color="text.secondary" sx={{ mb: 6 }}>
-          <Link to="/" color="inherit" underline="none">
-            PostIt
+    <div className="login-container">
+      <div className="login-header">
+        <h2 className="login-title">
+          <Link className="link" to="/">
+            SinkIN
           </Link>
-        </Typography>
-        <Typography variant="h5" gutterBottom>
-          Login
-        </Typography>
-        <Typography color="text.secondary">
+        </h2>
+        <h5 className="login-subtitle">Login</h5>
+        <p className="login-secondary-text">
           Don't have an account yet? <Link to="/signup">Sign Up</Link>
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit}>
-          <TextField
-            label="Email Address"
-            fullWidth
-            margin="normal"
-            autoComplete="email"
-            autoFocus
-            required
-            id="email"
-            name="email"
-            onChange={handleChange}
-          />
-          <TextField
-            label="Password"
-            fullWidth
-            required
-            margin="normal"
-            id="password  "
-            name="password"
-            onChange={handleChange}
-            type="password"
-          />
+        </p>
+      </div>
+      <form className="login-form" onSubmit={handleSubmit}>
+        <input
+          className="login-input"
+          type="email"
+          name="email"
+          placeholder="Email Address"
+          autoComplete="email"
+          autoFocus
+          required
+          onChange={handleChange}
+        />
+        <input
+          className="login-input"
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+          onChange={handleChange}
+        />
 
-          <ErrorAlert error={serverError} />
-          <Button type="submit" fullWidth variant="contained" sx={{ my: 2 }}>
-            Login
-          </Button>
-        </Box>
-        <Box sx={{ mt: 3 }}>
-          <Copyright />
-        </Box>
-      </Stack>
-    </Container>
+        <ErrorAlert error={serverError} />
+        <button className="login-button" type="submit">
+          Login
+        </button>
+      </form>
+    </div>
   );
 };
 

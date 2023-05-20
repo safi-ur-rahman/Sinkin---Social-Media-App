@@ -56,7 +56,7 @@ const FindUsers = () => {
               Results found
             </Typography> */}
             <IconButton
-            sx={{ padding: 0 }}
+            sx={{ padding: 0, color: "#fff" }}
             disabled={loading}
             onClick={handleClick}
           >
@@ -91,7 +91,7 @@ const FindUsers = () => {
                 <UserAvatar width={30} height={30} username={user.username} />
                 <Typography>{user.username}</Typography>
               </HorizontalStack>
-              <Link to={"/users/" + user.username}>View</Link>
+              <Link className="link" to={"/users/" + user.username}>View</Link>
             </HorizontalStack>
           ))
         )}

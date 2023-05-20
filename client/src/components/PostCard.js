@@ -5,6 +5,7 @@ import {
   Stack,
   Typography,
   useTheme,
+  Avatar,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
@@ -99,7 +100,8 @@ const PostCard = (props) => {
             alignItems="center"
             spacing={1}
             sx={{
-              backgroundColor: "grey.100",
+              color: "#00aaff",
+              backgroundColor: "#444",
               width: "50px",
               padding: theme.spacing(1),
             }}
@@ -132,7 +134,7 @@ const PostCard = (props) => {
                         <AiFillEdit color={iconColor} />
                       )}
                     </IconButton>
-                    <IconButton
+                    <IconButton 
                       disabled={loading}
                       size="small"
                       onClick={handleDeletePost}
@@ -172,6 +174,8 @@ const PostCard = (props) => {
                   <Markdown content={post.content} />
                 </Box>
               ))}
+
+              <img style = {{width:'600px', height:'auto'}} src={'http://localhost:3000/' + post.image} alt="post" />
 
             <HorizontalStack sx={{ mt: 1 }}>
               <AiFillMessage />

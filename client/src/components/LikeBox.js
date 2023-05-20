@@ -24,7 +24,7 @@ const LikeBox = (props) => {
 
   return (
     <Stack alignItems="center">
-      <IconButton sx={{ padding: 0.5 }} onClick={handleLike}>
+      <IconButton sx={{color: "#00aaff", padding: 0.5 }} onClick={handleLike}>
         {liked ? (
           <IconContext.Provider value={{ color: theme.palette.primary.main }}>
             <AiFillLike />

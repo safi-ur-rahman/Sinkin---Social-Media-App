@@ -120,11 +120,12 @@ const PostBrowser = (props) => {
         <Card>
           <HorizontalStack justifyContent="space-between">
             {props.createPost && <CreatePost />}
-            <SortBySelect
+            {/* <SortBySelect
               onSortBy={handleSortBy}
               sortBy={sortBy}
               sorts={sorts}
-            />
+            /> */}
+
           </HorizontalStack>
         </Card>
 

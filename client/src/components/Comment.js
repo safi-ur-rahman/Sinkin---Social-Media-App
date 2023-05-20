@@ -1,7 +1,4 @@
-import { Button, IconButton, Typography, useTheme } from "@mui/material";
-import { Box, compose } from "@mui/system";
 import React, { useState } from "react";
-import { AiFillEdit, AiOutlineLine, AiOutlinePlus } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { isLoggedIn } from "../helpers/authHelper";
 import CommentEditor from "./CommentEditor";
@@ -10,20 +7,22 @@ import HorizontalStack from "./util/HorizontalStack";
 import { deleteComment, updateComment } from "../api/posts";
 import ContentUpdateEditor from "./ContentUpdateEditor";
 import Markdown from "./Markdown";
-import { MdCancel } from "react-icons/md";
-import { BiReply, BiTrash } from "react-icons/bi";
-import { BsReply, BsReplyFill } from "react-icons/bs";
 import Moment from "react-moment";
+import {
+  AiFillEdit,
+  AiOutlineLine,
+  AiOutlinePlus,
+  AiFillDelete,
+} from "react-icons/ai";
+import { MdCancel } from "react-icons/md";
+import { BsReplyFill } from "react-icons/bs";
+import"./comment.css"
 
 const Comment = (props) => {
-  const theme = useTheme();
-  const iconColor = theme.palette.primary.main;
-  const { depth, addComment, removeComment, editComment } = props;
-  const commentData = props.comment;
-  const [minimised, setMinimised] = useState(depth % 4 === 3);
+  const [minimised, setMinimised] = useState(props.depth % 4 === 3);
   const [replying, setReplying] = useState(false);
   const [editing, setEditing] = useState(false);
-  const [comment, setComment] = useState(commentData);
+  const [comment, setComment] = useState(props.comment);
   const user = isLoggedIn();
   const isAuthor = user && user.userId === comment.commenter._id;
   const navigate = useNavigate();
@@ -47,60 +46,56 @@ const Comment = (props) => {
 
     setComment(newCommentData);
 
-    editComment(newCommentData);
+    props.editComment(newCommentData);
 
     setEditing(false);
   };
 
   const handleDelete = async () => {
     await deleteComment(comment._id, user);
-    removeComment(comment);
+    props.removeComment(comment);
   };
 
   let style = {
-    backgroundColor: theme.palette.grey[100],
+    backgroundColor: "#f0f0f0",
     borderRadius: 1.5,
-    mb: theme.spacing(2),
-    padding: theme.spacing(0),
+    marginBottom: "8px",
+    padding: 0,
   };
 
-  if (depth % 2 === 1) {
-    style.backgroundColor = "white";
+  if (props.depth % 2 === 1) {
+    style.backgroundColor = "#444";
   }
 
   return (
-    <Box sx={style}>
-      <Box
-        sx={{
-          pl: theme.spacing(2),
-          pt: theme.spacing(1),
-          pb: theme.spacing(1),
-          pr: 1,
-        }}
-      >
+    <div style={style}>
+      <div className="comment-header">
         {props.profile ? (
-          <Box>
-            <Typography variant="h6">
-              <Link underline="hover" to={"/posts/" + comment.post._id}>
+          <div>
+            <h6>
+              <Link
+                className="comment-link"
+                to={"/posts/" + comment.post._id}
+              >
                 {comment.post.title}
               </Link>
-            </Typography>
-            <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+            </h6>
+            <p className="comment-timestamp">
               <Moment fromNow>{comment.createdAt}</Moment>{" "}
               {comment.edited && <>(Edited)</>}
-            </Typography>
-          </Box>
+            </p>
+          </div>
         ) : (
-          <HorizontalStack justifyContent="space-between">
-            <HorizontalStack>
+          <div className="comment-details">
+            <div className="comment-details-left">
               <ContentDetails
                 username={comment.commenter.username}
                 createdAt={comment.createdAt}
                 edited={comment.edited}
               />
 
-              <IconButton
-                color="primary"
+              <button
+                className="comment-toggle-button"
                 onClick={() => setMinimised(!minimised)}
               >
                 {minimised ? (
@@ -108,87 +103,85 @@ const Comment = (props) => {
                 ) : (
                   <AiOutlineLine size={15} />
                 )}
-              </IconButton>
-            </HorizontalStack>
-            {!minimised && (
-              <HorizontalStack spacing={1}>
-                <IconButton
-                  variant="text"
-                  size="small"
-                  onClick={handleSetReplying}
-                >
-                  {!replying ? (
-                    <BsReplyFill color={iconColor} />
-                  ) : (
-                    <MdCancel color={iconColor} />
+              </button>
+            </div>
+            <div className="comment-details-right">
+              {!minimised && (
+                <div className="comment-actions">
+                  <button
+                    className="comment-reply-button"
+                    onClick={handleSetReplying}
+                  >
+                    {!replying ? (
+                      <BsReplyFill color="blue" />
+                    ) : (
+                      <MdCancel color="blue" />
+                    )}
+                  </button>
+                  {user && (isAuthor || user.isAdmin) && (
+                    <div className="comment-admin-actions">
+                      <button
+                        className="comment-edit-button"
+                        onClick={() => setEditing(!editing)}
+                      >
+                        {editing ? (
+                          <MdCancel color="blue" />
+                        ) : (
+                          <AiFillEdit color="blue" />
+                        )}
+                      </button>
+                      <button
+                        className="comment-delete-button"
+                        onClick={handleDelete}
+                      >
+                        <AiFillDelete color="red" />
+                      </button>
+                    </div>
                   )}
-                </IconButton>
-                {user && (isAuthor || user.isAdmin) && (
-                  <HorizontalStack spacing={1}>
-                    <IconButton
-                      variant="text"
-                      size="small"
-                      onClick={() => setEditing(!editing)}
-                    >
-                      {editing ? (
-                        <MdCancel color={iconColor} />
-                      ) : (
-                        <AiFillEdit color={iconColor} />
-                      )}
-                    </IconButton>
-                    <IconButton
-                      variant="text"
-                      size="small"
-                      onClick={handleDelete}
-                    >
-                      <BiTrash color={theme.palette.error.main} />
-                    </IconButton>
-                  </HorizontalStack>
-                )}
-              </HorizontalStack>
-            )}
-          </HorizontalStack>
+                </div>
+              )}
+            </div>
+          </div>
         )}
+      </div>
+      {!minimised && (
+        <div className="comment-content-container">
+          {!editing ? (
+            <Markdown content={comment.content} />
+          ) : (
+            <ContentUpdateEditor
+              handleSubmit={handleSubmit}
+              originalContent={comment.content}
+            />
+          )}
 
-        {!minimised && (
-          <Box sx={{ mt: 1 }} overflow="hidden">
-            {!editing ? (
-              <Markdown content={comment.content} />
-            ) : (
-              <ContentUpdateEditor
-                handleSubmit={handleSubmit}
-                originalContent={comment.content}
+          {replying && !minimised && (
+            <div className="comment-editor-container">
+              <CommentEditor
+                comment={comment}
+                addComment={props.addComment}
+                setReplying={setReplying}
+                label="What are your thoughts on this comment?"
               />
-            )}
-
-            {replying && !minimised && (
-              <Box sx={{ mt: 2 }}>
-                <CommentEditor
-                  comment={comment}
-                  addComment={addComment}
-                  setReplying={setReplying}
-                  label="What are your thoughts on this comment?"
+            </div>
+          )}
+          {comment.children && (
+            <div className="comment-children-container">
+              {comment.children.map((reply, i) => (
+                <Comment
+                  key={reply._id}
+                  comment={reply}
+                  depth={props.depth + 1}
+                  addComment={props.addComment}
+                  removeComment={props.removeComment}
+                  editComment={props.editComment}
                 />
-              </Box>
-            )}
-            {comment.children && (
-              <Box sx={{ pt: theme.spacing(2) }}>
-                {comment.children.map((reply, i) => (
-                  <Comment
-                    key={reply._id}
-                    comment={reply}
-                    depth={depth + 1}
-                    addComment={addComment}
-                    removeComment={removeComment}
-                    editComment={editComment}
-                  />
-                ))}
-              </Box>
-            )}
-          </Box>
-        )}
-      </Box>
-    </Box>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
   );
 };
 

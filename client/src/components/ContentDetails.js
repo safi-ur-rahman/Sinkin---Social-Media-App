@@ -10,7 +10,7 @@ const ContentDetails = ({ username, createdAt, edited, preview }) => {
     <HorizontalStack sx={{}}>
       <UserAvatar width={30} height={30} username={username} />
       <Typography variant="subtitle2" color="text.secondary" gutterBottom>
-        <Link
+        <Link className="link"
           color="inherit"
           underline="hover"
           onClick={(e) => {

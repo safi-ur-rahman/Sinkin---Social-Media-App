@@ -24,6 +24,7 @@ const PostEditor = () => {
   const [formData, setFormData] = useState({
     title: "",
     content: "",
+    image: ""
   });
 
   const [serverError, setServerError] = useState("");
@@ -31,7 +32,11 @@ const PostEditor = () => {
   const user = isLoggedIn();
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (e.target.name === "image") {
+      setFormData({ ...formData, [e.target.name]: e.target.files[0] });
+    } else {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
     const errors = validate();
     setErrors(errors);
   };
@@ -49,10 +54,10 @@ const PostEditor = () => {
     }
   };
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    // Do something with the file
-  };
+  // const handleFileChange = (event) => {
+  //   const file = event.target.files[0];
+  //   // Do something with the file
+  // };
 
   const validate = () => {
     const errors = {};
@@ -73,7 +78,7 @@ const PostEditor = () => {
         )}
 
         <Typography>
-          <a href="https://commonmark.org/help/" target="_blank">
+          <a className="link" href="https://commonmark.org/help/" target="_blank">
             Markdown Help
           </a>
         </Typography>
@@ -102,10 +107,12 @@ const PostEditor = () => {
             required
           />
             <Input
+              label="Image"
+              name="image"
               type="file"
               id="file-input"
               style={{ display: "none" }}
-              onChange={handleFileChange}
+              onChange={handleChange}
             />
             <label htmlFor="file-input">
               <Button
@@ -121,7 +128,7 @@ const PostEditor = () => {
                   },
                 }}
               >
-                Attach File
+                Upload Photo
               </Button>
             </label>
           <ErrorAlert error={serverError} />
